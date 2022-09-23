@@ -1,8 +1,10 @@
-import { StyleSheet, View, Text, FlatList, SafeAreaView, Image } from 'react-native';
+import { StyleSheet, View, Text, FlatList, SafeAreaView, Image, TouchableHighlight, Button } from 'react-native';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {
+    const navigation = useNavigation();
     const [loading, setLoading] = useState(true);
     const [collections, setCollections] = useState([]);
 
@@ -25,13 +27,15 @@ export default function HomeScreen() {
             for (const property in obj) {
                 filterdCollection.push(obj[property]);
             }
-            console.log(filterdCollection);
             setCollections(filterdCollection);
+            setLoading(false);
         } catch (error) {
             console.log(error);
         }
     }
-
+    const pindah = () => {
+        console.log("pindah woi");
+    };
     useEffect(() => {
         fetchData();
     }, []);
@@ -39,28 +43,34 @@ export default function HomeScreen() {
     const renderItem = ({ item }) => {
         return (
             <View style={styles.listItem}>
-                <Image
-                    style={styles.image}
-                    source={{
-                        uri: item.image_url
-                    }} />
+                <TouchableHighlight onPress={() => {
+                    navigation.navigate("Detail", { id: item.id });
+                }}>
+                    <Image
+                        style={styles.image}
+                        source={{
+                            uri: item.image_url
+                        }} />
+                </TouchableHighlight>
+
                 <Text style={styles.ColName}>{item.name}</Text>
                 <Text style={styles.ColName}>Number of owned tokens : {item.NumberOfOwnedTokens}</Text>
-
             </View>
         );
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View >
-                <FlatList
-                    data={collections}
-                    renderItem={renderItem}
-                    keyExtractor={(item) => item.id}
-                />
-            </View>
-        </SafeAreaView>
+        <View style={styles.container}>
+            {loading && <Text style={{ color: "black" }}>Loading..</Text>}
+            {!loading &&
+                <View >
+                    <FlatList
+                        data={collections}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.id}
+                    />
+                </View>}
+        </View>
     );
 }
 

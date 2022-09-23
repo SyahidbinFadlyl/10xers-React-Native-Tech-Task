@@ -1,10 +1,11 @@
 import { StyleSheet, View, Text } from 'react-native';
 
 
-export default function DetailScreen() {
+export default function DetailScreen({ navigation, route }) {
+    const { id } = route.params;
     return (
         <View style={styles.container}>
-            <Text>Detail Screen</Text>
+            <Text>Detail Screen Id : {id}</Text>
         </View>
     );
 }

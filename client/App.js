@@ -14,7 +14,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name='Home' component={HomeScreen} />
-        <Stack.Screen name="Detail" component={DetailScreen}/>
+        <Stack.Screen name="Detail" component={DetailScreen} options={{ headerTitle: "Back" }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
