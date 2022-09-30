@@ -33,9 +33,7 @@ export default function HomeScreen() {
             console.log(error);
         }
     }
-    const pindah = () => {
-        console.log("pindah woi");
-    };
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -44,7 +42,7 @@ export default function HomeScreen() {
         return (
             <View style={styles.listItem}>
                 <TouchableHighlight onPress={() => {
-                    navigation.navigate("Detail", { id: item.id });
+                    navigation.navigate("Detail", { external_id : item.external_id });
                 }}>
                     <Image
                         style={styles.image}
