@@ -42,7 +42,7 @@ export default function HomeScreen() {
         return (
             <View style={styles.listItem}>
                 <TouchableHighlight onPress={() => {
-                    navigation.navigate("Detail", { external_id : item.external_id });
+                    navigation.navigate("Detail", { external_id: item.external_id, NumberOfOwnedTokens: item.NumberOfOwnedTokens });
                 }}>
                     <Image
                         style={styles.image}
