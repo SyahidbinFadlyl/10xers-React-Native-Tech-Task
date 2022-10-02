@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
         borderRadius: 20
     },
     nameCollectionItem: {
-        fontSize: 30,
+        fontSize: 40,
         fontWeight: "bold",
         color: "e7e5e5"
     },
